@@ -5,15 +5,14 @@
 
 import numpy as np
 
-def similarity_search(smf):
+def similarity_search(smf, queries):
 
     d = len(smf[0])                           # dimension
     nb = len(smf)                      # database size
 
     # database
     xb = np.asarray(smf, dtype='float32')
-    # incoming queries
-    xq = np.asarray([[0]*d,[1]*d,[2]*d], dtype='float32')
+
 
     import faiss                   # make faiss available
     index = faiss.IndexFlatL2(d)   # build the index
@@ -23,7 +22,7 @@ def similarity_search(smf):
     k = 4                          # report back k nearest neighbors.
 
     print('\nActual Search...')
-    D, I = index.search(xq, k)     # actual search
+    D, I = index.search(queries, k)     # actual search
     print(I[:5])                   # neighbors of the 5 first queries
     print(I[-5:])                  # neighbors of the 5 last queries
 

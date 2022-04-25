@@ -19,7 +19,7 @@ def percent_shared_sites(query, match):
     num_sites = len(query)
     return 1-(num_shared_sites/num_sites)
 
-def all_matches(all_queries, all_matches, smf):
+def all_indexed_matches(all_queries, all_matches, smf):
     '''
     returns a list of lists, one list for each query
     one list is the percent matches for all index matches

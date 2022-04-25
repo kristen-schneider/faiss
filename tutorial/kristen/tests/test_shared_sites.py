@@ -39,6 +39,36 @@ class TestSharedSites(unittest.TestCase):
         self.assertEqual(shared_sites.percent_shared_sites(self.q3, self.m2), 0.6)
         self.assertEqual(shared_sites.percent_shared_sites(self.q3, self.m3), 0.8)
 
+class TestIndexedMatches(unittest.TestCase):
+    db = [[0, 0, 0, 0, 0],
+           [1, 1, 1, 1, 1],
+           [2, 2, 2, 2, 2],
+           [3, 3, 3, 3, 3],
+           [4, 4, 4, 4, 4]]
+    q1 = [[0, 0, 0, 0, 0]]
+    i1 = [[0, 1, 2]]
+    m1 = [[0., 1., 1.]]
+    q2 = [[1, 1, 1, 0, 0]]
+    i2 = [[1, 0, 2]]
+    m2 = [[0.4, 0.6, 1.]]
+    q3 = [[0, 0, 0, 0, 0],
+          [1, 1, 1, 1, 1],
+          [2, 2, 2, 2, 2]]
+    i3 = [[0, 1, 2],
+          [1, 2, 0],
+          [2, 3, 1]]
+    m3 = [[0., 1., 1.],
+          [0., 1., 1.],
+          [0., 1., 1.]]
+
+    def test_all_indexed_matches(self):
+        self.assertEqual(shared_sites.
+                         all_indexed_matches(self.q1, self.i1, self.db), self.m1)
+        self.assertEqual(shared_sites.
+                         all_indexed_matches(self.q2, self.i2, self.db), self.m2)
+        self.assertEqual(shared_sites.
+                         all_indexed_matches(self.q3, self.i3, self.db), self.m3)
+
 
 
 

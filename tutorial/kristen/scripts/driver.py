@@ -23,10 +23,11 @@ def main():
     # make queries
     d = len(smf[0])  # dimension
     queries = np.asarray([[0] * d, [1] * d, [2] * d], dtype='float32')
+    k = 3  # number of nearest neighbors to report
 
     # make (transform) genotype data the input data to similarity search
     print('\nConducting similarity search on transposed genotypes...')
-    match_indices = similarity_search.similarity_search(smf, queries)
+    match_indices = similarity_search.similarity_search(smf, queries, k)
 
 
     # # test accuracy

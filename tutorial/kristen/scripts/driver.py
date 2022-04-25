@@ -1,7 +1,7 @@
 import read_vcf
 import sample_major_format
 import similarity_search
-# import test_shared_sites
+import shared_sites
 import sys
 import numpy as np
 
@@ -23,23 +23,26 @@ def main():
     # make queries
     d = len(smf[0])  # dimension
     queries = np.asarray([[0] * d, [1] * d, [2] * d], dtype='float32')
-    k = 3  # number of nearest neighbors to report
+    k = 80  # number of nearest neighbors to report
 
     # make (transform) genotype data the input data to similarity search
     print('\nConducting similarity search on transposed genotypes...')
     match_indices = similarity_search.similarity_search(smf, queries, k)
 
 
-    # # test accuracy
-    # print('\nComputing number of shared sites between query and proposed matches...')
-    # test_shared_sites.all_matches(queries, match_indices, smf)
-    #
-    # print('\nFull shared sites...')
-    # all_accuracies = test_shared_sites.all_shared_sites(queries, smf)
-    # bf_indices = test_shared_sites.accuracy_indices(all_accuracies)
-    # test_shared_sites.ss_vs_bf(match_indices, bf_indices, 3)
+    # test accuracy
+    print('\nComputing number of shared sites between query and proposed matches...')
+    percent_similar = shared_sites.all_indexed_matches(queries, match_indices, smf)
+    # print(percent_similar)
 
-    print('end')
+    print('\nComparing FAISS to brute force...')
+    bf_similarities = shared_sites.all_database(queries, smf)
+    bf_indices = shared_sites.accuracy_indices(bf_similarities)
+    x = shared_sites.ss_vs_bf(match_indices, bf_indices, 80)
+    print(x)
+
+
+    print('\nEnd.')
 
 
     # similarity search

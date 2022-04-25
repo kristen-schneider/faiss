@@ -128,6 +128,5 @@ class TestSSvsBF(unittest.TestCase):
         self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf2, 1), False)
         self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf2, 4), False)
 
-
 if __name__ == '__main__':
     unittest.main()

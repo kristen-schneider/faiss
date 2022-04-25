@@ -68,15 +68,8 @@ def accuracy_indices(accuracty_list):
     return ordered_indices
 
 def ss_vs_bf(ss_indices, bf_indices, k):
-    for i in range(len(ss_indices)):
+    for i in range(k):
         if ss_indices[i] == bf_indices[i]:
             continue
         else: return False
     return True
-    # print('SS')
-    # for ss in ss_indices:
-    #     print(ss[:k])
-    #
-    # print('BF')
-    # for bf in bf_indices:
-    #     print(bf[:k])

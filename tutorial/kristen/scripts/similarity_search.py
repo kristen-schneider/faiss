@@ -18,8 +18,8 @@ def similarity_search(smf, queries, k):
     index.add(numpy_smf)                    # add vectors to the index
     print('Number of samples: ', index.ntotal)
 
-    print('\nSearching...')
+    print('Searching...')
     D, I = index.search(numpy_queries, k)     # actual search
-    print('\n...search complete.')
+    print('...search complete.')
 
     return I

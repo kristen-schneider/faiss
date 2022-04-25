@@ -20,7 +20,7 @@ def main():
 
     # make (transform) genotype data the input data to similarity search
     print('\nConducting similarity search on tranposed genotypes...')
-    similarity_search.similarity_search(smf)
+    match_indeces = similarity_search.similarity_search(smf)
 
     # similarity search
 

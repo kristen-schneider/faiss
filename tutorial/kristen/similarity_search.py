@@ -29,3 +29,5 @@ def similarity_search(smf):
 
     print('\nMISC...')
     print(I)
+
+    return I

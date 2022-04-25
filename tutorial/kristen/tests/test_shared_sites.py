@@ -93,7 +93,25 @@ class TestAllDatabase(unittest.TestCase):
         self.assertEqual(shared_sites.all_database(self.q3, self.db), self.m3)
         self.assertEqual(shared_sites.all_database(self.q4, self.db), self.m4)
 
+class TestAccuracyIndices(unittest.TestCase):
+    m1 = [[0., 1., 1., 1., 1.]]
+    m2 = [[1., 0., 1., 1., 1.]]
+    m3 = [[0., 1., 1., 1., 1.],
+          [1., 0., 1., 1., 1.],
+          [1., 1., 0., 1., 1.]]
+    m4 = [[0.6, 0.6, 0.8, 1., 1.]]
 
+    def test_accuracy_indices(self):
+        self.assertIsNone(np.testing.assert_array_equal(
+            shared_sites.accuracy_indices(self.m1), [[0, 1, 2, 3, 4]]))
+        self.assertIsNone(np.testing.assert_array_equal(
+            shared_sites.accuracy_indices(self.m2), [[1, 0, 2, 3, 4]]))
+        self.assertIsNone(np.testing.assert_array_equal(
+            shared_sites.accuracy_indices(self.m3), [[0, 1, 2, 3, 4],
+                                                     [1, 0, 2, 3, 4],
+                                                     [2, 0, 1, 3, 4]]))
+        self.assertIsNone(np.testing.assert_array_equal(
+            shared_sites.accuracy_indices(self.m1), [[0, 1, 2, 3, 4]]))
 
 
 if __name__ == '__main__':

@@ -24,14 +24,20 @@ def all_matches(all_queries, all_matches, smf):
     returns a list of lists, one list for each query
     one list is the percent matches for all index matches
     '''
+
+    pss_ss_index = []
+
     for q in range(len(all_queries)):
         q_query = all_queries[q]
         q_matches = all_matches[q]
         for m in range(len(q_matches)):
             m_sample = smf[q_matches[m]]
             p_ss = percent_shared_sites(q_query, m_sample)
-
-            #print(p_ss)
+            try:
+                pss_ss_index[q].append(p_ss)
+            except IndexError:
+                pss_ss_index.append([p_ss])
+    return pss_ss_index
 
 def all_shared_sites(queries, full_database):
     '''
@@ -45,8 +51,10 @@ def all_shared_sites(queries, full_database):
         for sample_i in range(len(full_database)):
             curr_sample = full_database[sample_i]
             p_ss = percent_shared_sites(curr_query, curr_sample)
-            try: accuracy_list[query_i].append(p_ss)
-            except IndexError: accuracy_list.append([p_ss])
+            try:
+                accuracy_list[query_i].append(p_ss)
+            except IndexError:
+                accuracy_list.append([p_ss])
     return accuracy_list
 
 def accuracy_indices(accuracty_list):

@@ -113,6 +113,21 @@ class TestAccuracyIndices(unittest.TestCase):
         self.assertIsNone(np.testing.assert_array_equal(
             shared_sites.accuracy_indices(self.m1), [[0, 1, 2, 3, 4]]))
 
+class TestSSvsBF(unittest.TestCase):
+    ss1 = [0, 1, 2, 3, 4]
+    ss2 = [1, 2, 0, 3, 4]
+    bf1 = [0, 1, 2, 3, 4]
+    bf2 = [1, 2, 0, 3, 4]
+    def test_ss_vs_bf(self):
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf1, 1), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf1, 2), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf1, 5), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss2, self.bf2, 1), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss2, self.bf2, 2), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss2, self.bf2, 5), True)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf2, 1), False)
+        self.assertEqual(shared_sites.ss_vs_bf(self.ss1, self.bf2, 4), False)
+
 
 if __name__ == '__main__':
     unittest.main()

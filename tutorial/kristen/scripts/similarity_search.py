@@ -4,20 +4,19 @@
 # LICENSE file in the root directory of this source tree.
 
 import numpy as np
+import faiss  # make faiss available
 
 def similarity_search(smf, queries):
 
-    d = len(smf[0])                           # dimension
-    nb = len(smf)                      # database size
+    num_variants = len(smf[0])            # dimension
+    num_samples = len(smf)                # database size
 
     # database
-    xb = np.asarray(smf, dtype='float32')
+    all_samples = np.asarray(smf, dtype='float32')
 
-
-    import faiss                   # make faiss available
-    index = faiss.IndexFlatL2(d)   # build the index
+    index = faiss.IndexFlatL2(num_variants)   # build the index
     print(index.is_trained)
-    index.add(xb)                  # add vectors to the index
+    index.add(all_samples)                  # add vectors to the index
     print(index.ntotal)
     k = 3                          # report back k nearest neighbors.
 

@@ -1,7 +1,7 @@
 import read_vcf
 import sample_major_format
 import similarity_search
-import test_shared_sites
+# import test_shared_sites
 import sys
 import numpy as np
 
@@ -28,14 +28,15 @@ def main():
     print('\nConducting similarity search on transposed genotypes...')
     match_indices = similarity_search.similarity_search(smf, queries)
 
-    # test accuracy
-    print('\nComputing number of shared sites between query and proposed matches...')
-    test_shared_sites.all_matches(queries, match_indices, smf)
 
-    print('\nFull shared sites...')
-    all_accuracies = test_shared_sites.all_shared_sites(queries, smf)
-    bf_indices = test_shared_sites.accuracy_indices(all_accuracies)
-    test_shared_sites.ss_vs_bf(match_indices, bf_indices, 3)
+    # # test accuracy
+    # print('\nComputing number of shared sites between query and proposed matches...')
+    # test_shared_sites.all_matches(queries, match_indices, smf)
+    #
+    # print('\nFull shared sites...')
+    # all_accuracies = test_shared_sites.all_shared_sites(queries, smf)
+    # bf_indices = test_shared_sites.accuracy_indices(all_accuracies)
+    # test_shared_sites.ss_vs_bf(match_indices, bf_indices, 3)
 
     print('end')
 

@@ -39,7 +39,7 @@ def all_indexed_matches(all_queries, all_matches, smf):
                 pss_ss_index.append([p_ss])
     return pss_ss_index
 
-def all_shared_sites(queries, full_database):
+def all_database(queries, full_database):
     '''
     returns a list of lists, one list for each query
     one list is the percent matches for all samples in database

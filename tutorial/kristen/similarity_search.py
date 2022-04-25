@@ -19,7 +19,7 @@ def similarity_search(smf, queries):
     print(index.is_trained)
     index.add(xb)                  # add vectors to the index
     print(index.ntotal)
-    k = 4                          # report back k nearest neighbors.
+    k = 3                          # report back k nearest neighbors.
 
     print('\nActual Search...')
     D, I = index.search(queries, k)     # actual search
@@ -27,6 +27,6 @@ def similarity_search(smf, queries):
     print(I[-5:])                  # neighbors of the 5 last queries
 
     print('\nMISC...')
-    print(I)
+    #print(I)
 
     return I

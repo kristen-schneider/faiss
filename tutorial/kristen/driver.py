@@ -33,12 +33,10 @@ def main():
     test_shared_sites.all_matches(queries, match_indices, smf)
 
     print('\nFull shared sites...')
-    accuracy_list = test_shared_sites.all_shared_sites(queries, smf)
-    for l in accuracy_list:
-        print('STARTING OVER')
-        max_value = max(l)
-        for v in range(len(l)):
-            if l[v] == max_value: print(v)
+    all_accuracies = test_shared_sites.all_shared_sites(queries, smf)
+    bf_indices = test_shared_sites.accuracy_indices(all_accuracies)
+    test_shared_sites.ss_vs_bf(match_indices, bf_indices, 3)
+
     print('end')
 
 

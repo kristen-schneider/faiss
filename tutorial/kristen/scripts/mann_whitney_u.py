@@ -25,11 +25,6 @@ def mann_whitney_u_all_queries(queries, population):
     all_p_values = []
     for q in queries:
         p_value_q = mann_whitney_u_one_query(q, population)
-        all_p_values.append(p_value_q)
-
+        p_value_sorted_indices = np.argsort(p_value_q)
+        all_p_values.append(np.flip(p_value_sorted_indices))
     return all_p_values
-
-# def sort_pvalues(all_p_values):
-
-def get_sorted_pvalue_indices(all_p_values):
-    return np.argsort(all_p_values)

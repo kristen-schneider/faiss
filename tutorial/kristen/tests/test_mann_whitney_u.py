@@ -24,18 +24,19 @@ class TestMannWhitneyUSmall(unittest.TestCase):
         self.assertEqual(mann_whitney_u.mann_whitney_u_test(self.group2, self.group3)[1], 1)
         self.assertGreaterEqual(mann_whitney_u.mann_whitney_u_test(self.group1, self.group6)[1], 1)
 
-class TestMannWhitneyUGenotypes(unittest.TestCase):
-    group1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    group2 = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0]
-    group3 = [0, 0, 2, 1, 0, 0, 0, 2, 0, 0]
-    group4 = [0, 0, 0, 1, 0, 0, 0, 1, 0, 1]
-    group5 = [0, 0, 1, 1, 0, 0, 0, 1, 1, 1]
 
-    print(mann_whitney_u.mann_whitney_u_test(group1, group2))
-    print(mann_whitney_u.mann_whitney_u_test(group1, group3))
-    print(mann_whitney_u.mann_whitney_u_test(group1, group4))
-    print(mann_whitney_u.mann_whitney_u_test(group1, group5))
-    # print(mann_whitney_u.mann_whitney_u_test(group3, group5))
+# class TestMannWhitneyUGenotypes(unittest.TestCase):
+#     group1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+#     group2 = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0]
+#     group3 = [0, 0, 2, 1, 0, 0, 0, 2, 0, 0]
+#     group4 = [0, 0, 0, 1, 0, 0, 0, 1, 0, 1]
+#     group5 = [0, 0, 1, 1, 0, 0, 0, 1, 1, 1]
+#
+#     print(mann_whitney_u.mann_whitney_u_test(group1, group2))
+#     print(mann_whitney_u.mann_whitney_u_test(group1, group3))
+#     print(mann_whitney_u.mann_whitney_u_test(group1, group4))
+#     print(mann_whitney_u.mann_whitney_u_test(group1, group5))
+#     # print(mann_whitney_u.mann_whitney_u_test(group3, group5))
 
 
 

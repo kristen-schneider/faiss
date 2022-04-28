@@ -45,9 +45,8 @@ def main():
 
     # mann whitney u test
     print('\nComputing Man Whitney U Test for all queries...')
-    all_p_values = mann_whitney_u.mann_whitney_u_all_queries(queries, smf)
-    p_value_indices = mann_whitney_u.get_sorted_pvalue_indices(all_p_values)
-    print(p_value_indices)
+    sorted_p_value_indices = mann_whitney_u.mann_whitney_u_all_queries(queries, smf)
+    for s in sorted_p_value_indices: print(s)
 
     print('\nEnd.')
 

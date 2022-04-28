@@ -2,6 +2,7 @@ import read_vcf
 import sample_major_format
 import similarity_search
 import shared_sites
+import mann_whitney_u
 import sys
 import numpy as np
 
@@ -23,32 +24,30 @@ def main():
     # make queries
     d = len(smf[0])  # dimension
     num_queries = 4
-    queries = [[0] * d, [1] * d]
-    # for q in range(num_queries-1):
-    #     queries.append(np.random.randint(0, high=4, size=d, dtype=int))
+    q_indices = [4, 728, 1786, 2311]
+    queries = [smf[q_i] for q_i in q_indices]
+
 
     k = 25     # number of nearest neighbors to report
 
     # make (transform) genotype data the input data to similarity search
     print('\nConducting similarity search on transposed genotypes...')
     match_indices_flatL2 = similarity_search.flatL2(smf, queries, k)
-    print(match_indices_flatL2)
+    # print(match_indices_flatL2)
     # match_indices_inner_product = similarity_search.inner_product(smf, queries, k)
     # print(match_indices_inner_product)
 
 
-    # test accuracy
+    # shared sites
     print('\nComputing number of shared sites between query and proposed matches...')
-    percent_similar = shared_sites.all_indexed_matches(queries, match_indices_flatL2, smf)
+    all_shared_sites = shared_sites.all_sample_shared_sites(queries, smf)
+    indices_shared_sites = shared_sites.sort_shared_sites_percentages(all_shared_sites)
 
-
-    print('\nComparing FAISS to brute force...')
-    bf_similarities = shared_sites.all_database(queries, smf)
-    bf_indices = shared_sites.accuracy_indices(bf_similarities)
-    print('indices:\n', bf_indices)
-    # print('percent similiar:\n', percent_similar)
-    x = shared_sites.ss_vs_bf(match_indices_flatL2, bf_indices, k)
-
+    # mann whitney u test
+    print('\nComputing Man Whitney U Test for all queries...')
+    all_p_values = mann_whitney_u.mann_whitney_u_all_queries(queries, smf)
+    p_value_indices = mann_whitney_u.get_sorted_pvalue_indices(all_p_values)
+    print(p_value_indices)
 
     print('\nEnd.')
 

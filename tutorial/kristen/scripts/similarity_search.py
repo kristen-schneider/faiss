@@ -49,7 +49,7 @@ def flatL2(smf, queries, k):
     print('Searching...')
     D, I = index.search(numpy_queries, k)     # actual search
     print('indices:\n', I)
-    print('distances:\n', D)
+    # print('distances:\n', D)
     print('...search complete.')
 
     return I

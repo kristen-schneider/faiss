@@ -27,27 +27,27 @@ def main():
     # for q in range(num_queries-1):
     #     queries.append(np.random.randint(0, high=4, size=d, dtype=int))
 
-    k = 2548     # number of nearest neighbors to report
+    k = 25     # number of nearest neighbors to report
 
     # make (transform) genotype data the input data to similarity search
     print('\nConducting similarity search on transposed genotypes...')
     match_indices_flatL2 = similarity_search.flatL2(smf, queries, k)
     print(match_indices_flatL2)
-    match_indices_inner_product = similarity_search.inner_product(smf, queries, k)
-    print(match_indices_inner_product)
+    # match_indices_inner_product = similarity_search.inner_product(smf, queries, k)
+    # print(match_indices_inner_product)
 
 
-    # # test accuracy
-    # print('\nComputing number of shared sites between query and proposed matches...')
-    # percent_similar = shared_sites.all_indexed_matches(queries, match_indices_flatL2, smf)
-    #
-    #
-    # print('\nComparing FAISS to brute force...')
-    # bf_similarities = shared_sites.all_database(queries, smf)
-    # bf_indices = shared_sites.accuracy_indices(bf_similarities)
-    # print('indices:\n', bf_indices)
+    # test accuracy
+    print('\nComputing number of shared sites between query and proposed matches...')
+    percent_similar = shared_sites.all_indexed_matches(queries, match_indices_flatL2, smf)
+
+
+    print('\nComparing FAISS to brute force...')
+    bf_similarities = shared_sites.all_database(queries, smf)
+    bf_indices = shared_sites.accuracy_indices(bf_similarities)
+    print('indices:\n', bf_indices)
     # print('percent similiar:\n', percent_similar)
-    # x = shared_sites.ss_vs_bf(match_indices_flatL2, bf_indices, k)
+    x = shared_sites.ss_vs_bf(match_indices_flatL2, bf_indices, k)
 
 
     print('\nEnd.')

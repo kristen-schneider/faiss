@@ -17,55 +17,55 @@ def percent_shared_sites(query, match):
     '''
     num_shared_sites = count_shared_sites(query, match)
     num_sites = len(query)
-    return 1-(num_shared_sites/num_sites)
+    return (num_shared_sites/num_sites)
 
-def all_indexed_matches(all_queries, all_matches, smf):
-    '''
-    returns a list of lists, one list for each query
-    one list is the percent matches for all index matches
-    '''
-
-    pss_ss_index = []
-
-    for q in range(len(all_queries)):
-        q_query = all_queries[q]
-        q_matches = all_matches[q]
-        for m in range(len(q_matches)):
-            m_sample = smf[q_matches[m]]
-            p_ss = percent_shared_sites(q_query, m_sample)
-            try:
-                pss_ss_index[q].append(p_ss)
-            except IndexError:
-                pss_ss_index.append([p_ss])
-    return pss_ss_index
-
-def all_database(queries, full_database):
+def all_sample_shared_sites(queries, all_samples):
     '''
     returns a list of lists, one list for each query
     one list is the percent matches for all samples in database
     '''
-    accuracy_list = []
+    shared_sites_all_samples = []
 
     for query_i in range(len(queries)):
         curr_query = queries[query_i]
-        for sample_i in range(len(full_database)):
-            curr_sample = full_database[sample_i]
+        for sample_i in range(len(all_samples)):
+            curr_sample = all_samples[sample_i]
             p_ss = percent_shared_sites(curr_query, curr_sample)
             try:
-                accuracy_list[query_i].append(p_ss)
+                shared_sites_all_samples[query_i].append(p_ss)
             except IndexError:
-                accuracy_list.append([p_ss])
-    return accuracy_list
+                shared_sites_all_samples.append([p_ss])
+    return shared_sites_all_samples
 
-def accuracy_indices(accuracty_list):
+def sort_shared_sites_percentages(shared_sites_all_samples):
     '''
     sorts list of accuracy percentages and returns the indexes of the ordered list
     '''
     ordered_indices = []
-    for l in accuracty_list:
-        index_ordered = np.argsort(l)
-        ordered_indices.append(index_ordered)
+    for s in shared_sites_all_samples:
+        index_ordered = np.argsort(s)
+        ordered_indices.append(np.flip(index_ordered))
     return ordered_indices
+
+# def all_faiss_matches(all_queries, all_matches, smf):
+#     '''
+#     returns a list of lists, one list for each query
+#     one list is the percent matches for all index matches
+#     '''
+#
+#     pss_ss_index = []
+#
+#     for q in range(len(all_queries)):
+#         q_query = all_queries[q]
+#         q_matches = all_matches[q]
+#         for m in range(len(q_matches)):
+#             m_sample = smf[q_matches[m]]
+#             p_ss = percent_shared_sites(q_query, m_sample)
+#             try:
+#                 pss_ss_index[q].append(p_ss)
+#             except IndexError:
+#                 pss_ss_index.append([p_ss])
+#     return pss_ss_index
 
 # def ss_vs_bf(ss_indices, bf_indices, k):
 #
